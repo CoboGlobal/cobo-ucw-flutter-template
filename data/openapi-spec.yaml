@@ -1,0 +1,1325 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: cobo ucw demo backend server
+    description: cobo ucw backend server
+    contact:
+        name: Cobo Global
+        url: https://www.cobo.com/
+    license:
+        name: Apache License
+    version: v1.0.0
+servers:
+    - url: http://localhost:8000/v1
+      description: local environment server
+    - url: https://api.ucw-demo.sandbox.cobo.com/v1
+      description: sandbox environment server
+paths:
+    /dummy/error:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_ErrDummyRpc
+            requestBody:
+                content:
+                    application/json: {}
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.ErrorResponse'
+    /ping:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_Ping
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.PingReply'
+    /transactions/callback:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_CoboCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.CoboCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.CoboCallbackReply'
+    /transactions/webhook:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_TransactionWebhook
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.TransactionWebhookRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.TransactionWebhookReply'
+    /transactions/{transaction_id}/report:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_TransactionReport
+            parameters:
+                - name: transaction_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.TransactionReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.TransactionReportReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /tss_requests/webhook:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_TssRequestWebhook
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.TssRequestWebhookRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.TssRequestWebhookReply'
+    /tss_requests/{tss_request_id}/report:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_TssRequestReport
+            parameters:
+                - name: tss_request_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.TssRequestReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.TssRequestReportReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /users/info:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetUserInfo
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetUserInfoReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /users/login:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.LoginReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /users/node/bind:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_BindNode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.BindNodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.BindNodeReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/init:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_InitVault
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.InitVaultRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.InitVaultReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/disaster_recovery:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_DisasterRecovery
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.DisasterRecoveryReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/group/{group_id}:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetGroup
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: group_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetGroupReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/groups:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_ListGroups
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: group_type
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.ListGroupsReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/tss/generate_main_group:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GenerateMainGroup
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.GenerateMainGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GenerateMainGroupReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/tss/generate_recovery_group:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GenerateRecoveryGroup
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.GenerateRecoveryGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GenerateRecoveryGroupReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/tss/recover_main_group:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_RecoverMainGroup
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.RecoverMainGroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.RecoverMainGroupReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/tss/requests:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_ListTssRequest
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: node_id
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.ListTssRequestReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/tss/requests/{tss_request_id}:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetTssRequest
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tss_request_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetTssRequestReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /vaults/{vault_id}/wallets:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_CreateWallet
+            parameters:
+                - name: vault_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.CreateWalletRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.CreateWalletReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/transactions/{transaction_id}:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetTransaction
+            parameters:
+                - name: transaction_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetTransactionReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetWalletInfo
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetWalletInfoReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/address:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_AddWalletAddress
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.AddWalletAddressRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.AddWalletAddressReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/tokens:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_ListWalletToken
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.ListWalletTokenReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/tokens/{token_id}:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetWalletToken
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: token_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetWalletTokenReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/tokens/{token_id}/balance:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_GetTokenBalance
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: token_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: address
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.GetTokenBalanceReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/transactions:
+        get:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_ListTransaction
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: token_id
+                  in: query
+                  schema:
+                    type: string
+                - name: transaction_type
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.ListTransactionReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_CreateTransaction
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.CreateTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.CreateTransactionReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+    /wallets/{wallet_id}/transactions/estimate_fee:
+        post:
+            tags:
+                - UserControlWallet
+            operationId: UserControlWallet_EstimateTransactionFee
+            parameters:
+                - name: wallet_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ucw.v1.EstimateTransactionFeeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ucw.v1.EstimateTransactionFeeReply'
+                default:
+                    $ref: '#/components/responses/ErrResponse'
+components:
+    schemas:
+        ucw.v1.AddWalletAddressReply:
+            type: object
+            properties:
+                address:
+                    $ref: '#/components/schemas/ucw.v1.Address'
+        ucw.v1.AddWalletAddressRequest:
+            type: object
+            properties:
+                wallet_id:
+                    type: string
+                chain_id:
+                    type: string
+        ucw.v1.Address:
+            type: object
+            properties:
+                address:
+                    type: string
+                chain_id:
+                    type: string
+                wallet_id:
+                    type: string
+                path:
+                    type: string
+                pubkey:
+                    type: string
+                encoding:
+                    type: string
+        ucw.v1.Amount:
+            type: object
+            properties:
+                value:
+                    type: string
+                token:
+                    $ref: '#/components/schemas/ucw.v1.Token'
+        ucw.v1.BindNodeReply:
+            type: object
+            properties:
+                user_node:
+                    $ref: '#/components/schemas/ucw.v1.UserNode'
+        ucw.v1.BindNodeRequest:
+            type: object
+            properties:
+                node_id:
+                    type: string
+        ucw.v1.CoboCallbackReply:
+            type: object
+            properties: {}
+        ucw.v1.CoboCallbackRequest:
+            type: object
+            properties:
+                wallet_id:
+                    type: string
+                transaction_id:
+                    type: string
+                type:
+                    type: string
+        ucw.v1.CoboTransaction:
+            type: object
+            properties:
+                wallet_id:
+                    type: string
+                transaction_id:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                token_id:
+                    type: string
+                chain_id:
+                    type: string
+                failed_reason:
+                    type: string
+                request_id:
+                    type: string
+                sub_status:
+                    type: string
+                confirmed_num:
+                    type: string
+                confirming_threshold:
+                    type: string
+                source:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction_Source'
+                destination:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction_Destination'
+                raw_tx_info:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction_RawTxInfo'
+                fee:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction_Fee'
+                transaction_hash:
+                    type: string
+                block_info:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction_BlockInfo'
+                description:
+                    type: string
+        ucw.v1.CoboTransaction_BlockInfo:
+            type: object
+            properties:
+                block_number:
+                    type: string
+                block_time:
+                    type: string
+                block_hash:
+                    type: string
+        ucw.v1.CoboTransaction_Destination:
+            type: object
+            properties:
+                destination_type:
+                    type: string
+                address:
+                    type: string
+                change_address:
+                    type: string
+                amount:
+                    type: string
+                wallet_id:
+                    type: string
+                wallet_type:
+                    type: string
+                wallet_sub_type:
+                    type: string
+        ucw.v1.CoboTransaction_Fee:
+            type: object
+            properties:
+                fee_type:
+                    type: string
+                token_id:
+                    type: string
+                fee_used:
+                    type: string
+                gas_used:
+                    type: string
+                effective_gas_price:
+                    type: string
+                max_fee_per_gas:
+                    type: string
+                max_priority_fee_per_gas:
+                    type: string
+                gas_limit:
+                    type: string
+                fee_rate:
+                    type: string
+                fee_amount:
+                    type: string
+        ucw.v1.CoboTransaction_RawTxInfo:
+            type: object
+            properties:
+                used_nonce:
+                    type: string
+                selected_utxos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.CoboTransaction_UTXO'
+                raw_tx:
+                    type: string
+        ucw.v1.CoboTransaction_Source:
+            type: object
+            properties:
+                source_type:
+                    type: string
+                wallet_id:
+                    type: string
+                addresses:
+                    type: array
+                    items:
+                        type: string
+        ucw.v1.CoboTransaction_UTXO:
+            type: object
+            properties:
+                tx_hash:
+                    type: string
+                vout_n:
+                    type: string
+        ucw.v1.CoboTssRequest:
+            type: object
+            properties:
+                tss_request_id:
+                    type: string
+                status:
+                    type: string
+        ucw.v1.CreateTransactionReply:
+            type: object
+            properties:
+                transaction_id:
+                    type: string
+        ucw.v1.CreateTransactionRequest:
+            type: object
+            properties:
+                from:
+                    type: string
+                to:
+                    type: string
+                amount:
+                    type: string
+                token_id:
+                    type: string
+                chain:
+                    type: string
+                type:
+                    type: integer
+                    format: enum
+                fee:
+                    $ref: '#/components/schemas/ucw.v1.Fee'
+                wallet_id:
+                    type: string
+        ucw.v1.CreateWalletReply:
+            type: object
+            properties:
+                wallet_id:
+                    type: string
+        ucw.v1.CreateWalletRequest:
+            type: object
+            properties:
+                vault_id:
+                    type: string
+                name:
+                    type: string
+        ucw.v1.DisasterRecoveryReply:
+            type: object
+            properties:
+                vault:
+                    $ref: '#/components/schemas/ucw.v1.Vault'
+                wallet:
+                    $ref: '#/components/schemas/ucw.v1.Wallet'
+                addresses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.Address'
+        ucw.v1.ErrorResponse:
+            title: This err response
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                reason:
+                    type: string
+                message:
+                    type: string
+        ucw.v1.EstimateTransactionFeeReply:
+            type: object
+            properties:
+                slow:
+                    $ref: '#/components/schemas/ucw.v1.Fee'
+                recommend:
+                    $ref: '#/components/schemas/ucw.v1.Fee'
+                fast:
+                    $ref: '#/components/schemas/ucw.v1.Fee'
+        ucw.v1.EstimateTransactionFeeRequest:
+            type: object
+            properties:
+                from:
+                    type: string
+                to:
+                    type: string
+                token_id:
+                    type: string
+                amount:
+                    type: string
+                type:
+                    type: integer
+                    format: enum
+                wallet_id:
+                    type: string
+        ucw.v1.Fee:
+            type: object
+            properties:
+                fee_per_byte:
+                    type: string
+                gas_price:
+                    type: string
+                gas_limit:
+                    type: string
+                level:
+                    type: integer
+                    format: enum
+                max_fee:
+                    type: string
+                max_priority_fee:
+                    type: string
+                token_id:
+                    type: string
+                fee_amount:
+                    type: string
+        ucw.v1.GenerateMainGroupReply:
+            type: object
+            properties:
+                tss_request_id:
+                    type: string
+        ucw.v1.GenerateMainGroupRequest:
+            type: object
+            properties:
+                vault_id:
+                    type: string
+                node_id:
+                    type: string
+        ucw.v1.GenerateRecoveryGroupReply:
+            type: object
+            properties:
+                tss_request_id:
+                    type: string
+        ucw.v1.GenerateRecoveryGroupRequest:
+            type: object
+            properties:
+                vault_id:
+                    type: string
+                node_ids:
+                    type: array
+                    items:
+                        type: string
+        ucw.v1.GetGroupReply:
+            type: object
+            properties:
+                group:
+                    $ref: '#/components/schemas/ucw.v1.GroupInfo'
+        ucw.v1.GetTokenBalanceReply:
+            type: object
+            properties:
+                token_balance:
+                    $ref: '#/components/schemas/ucw.v1.TokenBalance'
+        ucw.v1.GetTransactionReply:
+            type: object
+            properties:
+                transaction:
+                    $ref: '#/components/schemas/ucw.v1.Transaction'
+        ucw.v1.GetTssRequestReply:
+            type: object
+            properties:
+                tss_request:
+                    $ref: '#/components/schemas/ucw.v1.TssRequest'
+        ucw.v1.GetUserInfoReply:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/ucw.v1.User'
+                vault:
+                    $ref: '#/components/schemas/ucw.v1.Vault'
+                wallet:
+                    $ref: '#/components/schemas/ucw.v1.Wallet'
+                user_nodes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.UserNode'
+        ucw.v1.GetWalletInfoReply:
+            type: object
+            properties:
+                wallet_info:
+                    $ref: '#/components/schemas/ucw.v1.WalletInfo'
+        ucw.v1.GetWalletTokenReply:
+            type: object
+            properties:
+                wallet:
+                    $ref: '#/components/schemas/ucw.v1.Wallet'
+                token_addresses:
+                    $ref: '#/components/schemas/ucw.v1.TokenAddresses'
+        ucw.v1.Group:
+            type: object
+            properties:
+                group_id:
+                    type: string
+                group_type:
+                    type: integer
+                    format: enum
+        ucw.v1.GroupInfo:
+            type: object
+            properties:
+                group:
+                    $ref: '#/components/schemas/ucw.v1.Group'
+                group_nodes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.GroupNode'
+        ucw.v1.GroupNode:
+            type: object
+            properties:
+                group_id:
+                    type: string
+                user_id:
+                    type: string
+                node_id:
+                    type: string
+                holder_name:
+                    type: string
+        ucw.v1.InitVaultReply:
+            type: object
+            properties:
+                vault:
+                    $ref: '#/components/schemas/ucw.v1.Vault'
+        ucw.v1.InitVaultRequest:
+            type: object
+            properties: {}
+        ucw.v1.ListGroupsReply:
+            type: object
+            properties:
+                groups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.Group'
+        ucw.v1.ListTransactionReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.Transaction'
+        ucw.v1.ListTssRequestReply:
+            type: object
+            properties:
+                tss_requests:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.TssRequest'
+        ucw.v1.ListWalletTokenReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.TokenBalance'
+        ucw.v1.LoginReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        ucw.v1.LoginRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        ucw.v1.PingReply:
+            type: object
+            properties:
+                timestamp:
+                    type: string
+        ucw.v1.RecoverMainGroupReply:
+            type: object
+            properties:
+                tss_request_id:
+                    type: string
+        ucw.v1.RecoverMainGroupRequest:
+            type: object
+            properties:
+                vault_id:
+                    type: string
+                node_id:
+                    type: string
+                source_group_id:
+                    type: string
+        ucw.v1.Token:
+            type: object
+            properties:
+                token_id:
+                    type: string
+                name:
+                    type: string
+                decimal:
+                    type: integer
+                    format: int32
+                symbol:
+                    type: string
+                chain:
+                    type: string
+                icon_url:
+                    type: string
+        ucw.v1.TokenAddresses:
+            type: object
+            properties:
+                token:
+                    $ref: '#/components/schemas/ucw.v1.TokenBalance'
+                addresses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ucw.v1.Address'
+        ucw.v1.TokenBalance:
+            type: object
+            properties:
+                token:
+                    $ref: '#/components/schemas/ucw.v1.Token'
+                balance:
+                    type: string
+                abs_balance:
+                    type: string
+                available:
+                    type: string
+                locked:
+                    type: string
+        ucw.v1.Transaction:
+            type: object
+            properties:
+                transaction_id:
+                    type: string
+                type:
+                    type: integer
+                    format: enum
+                chain:
+                    type: string
+                amount:
+                    $ref: '#/components/schemas/ucw.v1.Amount'
+                from:
+                    type: string
+                to:
+                    type: string
+                create_timestamp:
+                    type: string
+                tx_hash:
+                    type: string
+                fee:
+                    $ref: '#/components/schemas/ucw.v1.Fee'
+                status:
+                    type: integer
+                    format: enum
+                wallet_id:
+                    type: string
+                sub_status:
+                    type: integer
+                    format: enum
+                external_id:
+                    type: string
+        ucw.v1.TransactionReportReply:
+            type: object
+            properties: {}
+        ucw.v1.TransactionReportRequest:
+            type: object
+            properties:
+                transaction_id:
+                    type: string
+                action:
+                    type: integer
+                    format: enum
+        ucw.v1.TransactionWebhookReply:
+            type: object
+            properties: {}
+        ucw.v1.TransactionWebhookRequest:
+            type: object
+            properties:
+                event_id:
+                    type: string
+                url:
+                    type: string
+                created_timestamp:
+                    type: string
+                type:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/ucw.v1.CoboTransaction'
+        ucw.v1.TssRequest:
+            type: object
+            properties:
+                request_id:
+                    type: string
+                type:
+                    type: integer
+                    format: enum
+                status:
+                    type: integer
+                    format: enum
+                source_group_id:
+                    type: string
+                target_group_id:
+                    type: string
+                create_timestamp:
+                    type: string
+        ucw.v1.TssRequestReportReply:
+            type: object
+            properties: {}
+        ucw.v1.TssRequestReportRequest:
+            type: object
+            properties:
+                tss_request_id:
+                    type: string
+                action:
+                    type: integer
+                    format: enum
+        ucw.v1.TssRequestWebhookReply:
+            type: object
+            properties: {}
+        ucw.v1.TssRequestWebhookRequest:
+            type: object
+            properties:
+                event_id:
+                    type: string
+                url:
+                    type: string
+                created_timestamp:
+                    type: string
+                type:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/ucw.v1.CoboTssRequest'
+        ucw.v1.User:
+            type: object
+            properties:
+                user_id:
+                    type: string
+                email:
+                    type: string
+        ucw.v1.UserNode:
+            type: object
+            properties:
+                user_id:
+                    type: string
+                node_id:
+                    type: string
+                role:
+                    type: integer
+                    format: enum
+        ucw.v1.Vault:
+            type: object
+            properties:
+                vault_id:
+                    type: string
+                name:
+                    type: string
+                main_group_id:
+                    type: string
+                project_id:
+                    type: string
+                cobo_node_id:
+                    type: string
+                status:
+                    type: integer
+                    format: enum
+        ucw.v1.Wallet:
+            type: object
+            properties:
+                wallet_id:
+                    type: string
+                name:
+                    type: string
+        ucw.v1.WalletInfo:
+            type: object
+            properties:
+                wallet:
+                    $ref: '#/components/schemas/ucw.v1.Wallet'
+    responses:
+        ErrResponse:
+            description: default err response
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ucw.v1.ErrorResponse'
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+tags:
+    - name: UserControlWallet
